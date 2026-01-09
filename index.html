@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHERKO : BIBLE OPÉRATIONNELLE 2026</title>
+    
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,800&family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root { 
+            --primary: #7c3aed; /* Violet Vibrant */
+            --accent: #10b981; /* Emerald Green */
+            --danger: #ef4444; /* Red Alert */
+            --dark: #0f172a; 
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: var(--text-main); 
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        /* BACKGROUND FX */
+        .ambient-light {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.03), transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.03), transparent 50%);
+        }
+
+        /* GRID BACKGROUND */
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            background-image: linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px); 
+            background-size: 40px 40px;
+        }
+
+        /* TYPOGRAPHY */
+        .font-impact { font-family: 'Montserrat', sans-serif; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; }
+        .font-tech { font-family: 'JetBrains Mono', monospace; }
+        .font-nike { font-family: 'Montserrat', sans-serif; font-weight: 900; letter-spacing: -0.04em; text-transform: uppercase; font-style: italic; }
+        .font-code { font-family: 'JetBrains Mono', monospace; letter-spacing: -0.05em; }
+        
+        /* GLASSMOPHISM LIGHT */
+        .glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 232, 240, 1); 
+            box-shadow: 
+                0 10px 30px -5px rgba(0, 0, 0, 0.05), 
+                0 4px 6px -2px rgba(0, 0, 0, 0.02),
+                inset 0 0 20px rgba(255,255,255,0.8);
+            border-radius: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .glass:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(124, 58, 237, 0.15);
+        }
+
+        /* SECTION TITLES */
+        .section-header {
+            margin-bottom: 4rem;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 6px solid var(--primary);
+        }
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--primary);
+            background: rgba(124, 58, 237, 0.05);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* TIMELINE NODE */
+        .timeline-node {
+            position: relative;
+            padding-left: 4rem;
+            border-left: 2px solid #e2e8f0;
+            padding-bottom: 5rem;
+        }
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: -11px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 5px solid var(--primary);
+            z-index: 10;
+            box-shadow: 0 0 0 6px rgba(255, 255, 255, 1);
+        }
+        .timeline-node:last-child { border-left: none; }
+
+        /* SCROLL BAR */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fff; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* ANIMATIONS */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .counter { font-variant-numeric: tabular-nums; }
+
+        /* TERMINAL LIGHT */
+        .terminal-window { 
+            background: #0f172a; 
+            border: 1px solid rgba(124, 58, 237, 0.2); 
+            box-shadow: 0 30px 60px -20px rgba(15, 23, 42, 0.3); 
+            border-radius: 1.5rem; 
+            color: #fff;
+        }
+        
+        #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: var(--primary); z-index: 100; width: 0%; transition: width 0.1s; }
+        
+        .red-band {
+            background: #0f172a;
+            color: white;
+            padding: 2rem 0;
+            margin: 6rem 0;
+            transform: skewY(-1deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .red-band h2 { transform: skewY(1deg); margin: 0; }
+
+        /* PROTOCOL CARDS */
+        .protocol-card {
+            border-left: 4px solid #cbd5e1;
+            transition: all 0.3s ease;
+        }
+        .protocol-card:hover { border-left-color: var(--primary); background: #f8fafc; }
+        .protocol-card.crisis:hover { border-left-color: var(--danger); background: #fef2f2; }
+
+        /* APPLE/Nike premium elements for tools */
+        .super-glass {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+        }
+        .input-pro {
+            background: #111;
+            border: 1px solid #333;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .input-pro:focus {
+            background: #000;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+            outline: none;
+        }
+        .btn-atomic {
+            background: #fff;
+            color: #000;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-atomic:hover { transform: scale(1.02); box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); }
+        .btn-atomic::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: 0.5s;
+        }
+        .btn-atomic:hover::after { left: 100%; }
+        .badge-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+        }
+        /* AI output comfort */
+        .ai-output {
+            min-height: 640px;
+            max-width: 100%;
+            width: 100%;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        .ai-output * { max-width: 100% !important; }
+        .ai-output table { width: 100%; border-collapse: collapse; }
+        .ai-output table td, .ai-output table th { padding: 6px 8px; border: 1px solid rgba(255,255,255,0.08); }
+        .ai-output h1, .ai-output h2, .ai-output h3, .ai-output h4 { margin-top: 10px; margin-bottom: 6px; }
+    </style>
+</head>
+<body class="selection:bg-purple-200 selection:text-purple-900">
+
+    <div class="ambient-light" style="z-index:-4;"></div>
+    <div class="bg-grid" style="z-index:-3;"></div>
+    <div id="progress-bar"></div>
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center pointer-events-none">
+        <div class="flex items-center gap-4 bg-white/90 backdrop-blur-xl px-6 py-3 rounded-full border border-slate-200 shadow-xl pointer-events-auto">
+            <span class="font-black text-sm tracking-tighter text-slate-800">MADARA</span>
+            <span class="text-xs text-purple-600 font-mono font-bold">x</span>
+            <span class="font-black text-sm tracking-tighter text-slate-800">SHERKO</span>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+            <div class="bg-slate-900 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                MASTER PLAN V.3
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HERO & PRESENTATION -->
+    <section class="min-h-screen flex items-center justify-center relative px-6 py-20 overflow-hidden">
+        <div class="max-w-7xl w-full reveal active">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-8">
+                    <span class="section-tag">ARCHITECTURE OPÉRATIONNELLE</span>
+                    <h1 class="font-impact text-6xl md:text-8xl mb-6 leading-tight text-slate-900">
+                        DE L'INFLUENCE <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-500">À L'INSTITUTION.</span>
+                    </h1>
+                    <p class="text-slate-500 max-w-2xl text-lg font-medium leading-relaxed mb-8 border-l-4 border-purple-200 pl-6">
+                        Ce document est la <strong>Bible Opérationnelle</strong> complète. <br>
+                        De l'infrastructure technique à la gestion de crise, voici comment nous construisons l'Empire Sherko, brique par brique.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                         <div class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">Propriété audience</div>
+                         <div class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">Marque indestructible</div>
+                         <div class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">Rétention & récurrence</div>
+                         <div class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">Crise maîtrisée</div>
+                    </div>
+                </div>
+                <div class="md:col-span-4">
+                    <div class="glass p-8 bg-white border-t-4 border-purple-600">
+                        <h3 class="font-bold text-slate-900 mb-4 uppercase tracking-widest text-sm">Objectif Final</h3>
+                        <div class="text-5xl font-impact text-purple-600 mb-2">TOP 1</div>
+                        <p class="text-sm text-slate-500">Média Urbain Indépendant</p>
+                        <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-2 gap-4">
+                            <div>
+                                <span class="block text-2xl font-black text-slate-800">12</span>
+                                <span class="text-[10px] text-slate-400 font-bold uppercase">Mois</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-black text-slate-800">30+</span>
+                                <span class="text-[10px] text-slate-400 font-bold uppercase">Invités</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6ter. LINE-UP INVITÉS PRIORITAIRES -->
+    <section class="py-24 px-6 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto w-full reveal">
+            <div class="section-header">
+                <span class="section-tag">INVITÉS CIBLES</span>
+                <h2 class="font-impact text-4xl text-slate-900">LINE-UP PRIORITAIRE</h2>
+                <p class="text-slate-500 text-sm mt-2">Ordre de passage et cibles clés à approcher.</p>
+            </div>
+
+            <style>
+                .guest-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                    gap: 12px;
+                }
+                .guest-card {
+                    background: #0f172a;
+                    color: white;
+                    border: 1px solid rgba(255,255,255,0.08);
+                    border-radius: 14px;
+                    padding: 12px 14px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    box-shadow: 0 12px 30px -14px rgba(0,0,0,0.35);
+                }
+                .guest-number {
+                    width: 32px; height: 32px;
+                    border-radius: 10px;
+                    background: rgba(124,58,237,0.15);
+                    border: 1px solid rgba(124,58,237,0.35);
+                    display: flex; align-items: center; justify-content: center;
+                    font-weight: 800; font-size: 12px; color: #c4b5fd;
+                }
+                .guest-name {
+                    font-weight: 800;
+                    letter-spacing: -0.01em;
+                }
+            </style>
+
+            <div class="guest-grid">
+                <div class="guest-card"><div class="guest-number">01</div><div class="guest-name">GAZO</div></div>
+                <div class="guest-card"><div class="guest-number">02</div><div class="guest-name">ANTHONY JEAN JEAN</div></div>
+                <div class="guest-card"><div class="guest-number">03</div><div class="guest-name">HYCONIQ</div></div>
+                <div class="guest-card"><div class="guest-number">04</div><div class="guest-name">JDO</div></div>
+                <div class="guest-card"><div class="guest-number">05</div><div class="guest-name">ALEXIS NICOLAS</div></div>
+                <div class="guest-card"><div class="guest-number">06</div><div class="guest-name">BENJY</div></div>
+                <div class="guest-card"><div class="guest-number">07</div><div class="guest-name">DJ SYT</div></div>
+                <div class="guest-card"><div class="guest-number">08</div><div class="guest-name">ESTABUENO</div></div>
+                <div class="guest-card"><div class="guest-number">09</div><div class="guest-name">MOHAMED DIAWARA</div></div>
+                <div class="guest-card"><div class="guest-number">10</div><div class="guest-name">FLEM</div></div>
+                <div class="guest-card"><div class="guest-number">11</div><div class="guest-name">FRANKLIN</div></div>
+                <div class="guest-card"><div class="guest-number">12</div><div class="guest-name">YANIS DEPUTÉ</div></div>
+                <div class="guest-card"><div class="guest-number">13</div><div class="guest-name">PAULINE DUARTE</div></div>
+                <div class="guest-card"><div class="guest-number">14</div><div class="guest-name">LA MANO</div></div>
+                <div class="guest-card"><div class="guest-number">15</div><div class="guest-name">TARIK AZZOUZ</div></div>
+                <div class="guest-card"><div class="guest-number">16</div><div class="guest-name">JOGA - BANGZER</div></div>
+                <div class="guest-card"><div class="guest-number">17</div><div class="guest-name">SHIRUKEN MUSIC</div></div>
+                <div class="guest-card"><div class="guest-number">18</div><div class="guest-name">SAAD</div></div>
+                <div class="guest-card"><div class="guest-number">19</div><div class="guest-name">PATRICK HABIBORA</div></div>
+                <div class="guest-card"><div class="guest-number">20</div><div class="guest-name">AKM</div></div>
+                <div class="guest-card"><div class="guest-number">21</div><div class="guest-name">FARES (ACTIVISTE)</div></div>
+                <div class="guest-card"><div class="guest-number">22</div><div class="guest-name">NKF</div></div>
+                <div class="guest-card"><div class="guest-number">23</div><div class="guest-name">DAVID RINALDO</div></div>
+                <div class="guest-card"><div class="guest-number">24</div><div class="guest-name">HONYZUKA</div></div>
+                <div class="guest-card"><div class="guest-number">25</div><div class="guest-name">LE 144</div></div>
+                <div class="guest-card"><div class="guest-number">26</div><div class="guest-name">ISSAM</div></div>
+                <div class="guest-card"><div class="guest-number">27</div><div class="guest-name">BASS THE PLUG</div></div>
+                <div class="guest-card"><div class="guest-number">28</div><div class="guest-name">SIMON LARTIGUE</div></div>
+                <div class="guest-card"><div class="guest-number">29</div><div class="guest-name">JUNIOR A LA PROD</div></div>
+                <div class="guest-card"><div class="guest-number">30</div><div class="guest-name">PITT BACARDI</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6quater. ROADMAP 30/60/90 -->
+    <section class="py-24 px-6 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto w-full reveal">
+            <div class="section-header">
+                <span class="section-tag">NAVIGATION</span>
+                <h2 class="font-impact text-4xl text-slate-900">ROADMAP 30 / 60 / 90 JOURS</h2>
+                <p class="text-slate-500 text-sm mt-2">3 axes : Tech, Contenu, Business. Trois actions par horizon.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass p-6 border-t-4 border-purple-500">
+                    <h3 class="font-bold text-lg text-slate-900 mb-3">Tech (30j)</h3>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li>• Stabiliser setup (son/lumière/OBS) + macros crise.</li>
+                        <li>• Automatiser clips timecodés (Google Sheet partagé).</li>
+                        <li>• Proxy IA & e-sign en production (Cloudflare + modèles).</li>
+                    </ul>
+                </div>
+                <div class="glass p-6 border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-lg text-slate-900 mb-3">Contenu (60j)</h3>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li>• 3 pilotes en boîte, 1 best-of long format.</li>
+                        <li>• 50 shorts publiés (CTA Discord), CTR > 5%.</li>
+                        <li>• Lancement soft live + ouverture Discord.</li>
+                    </ul>
+                </div>
+                <div class="glass p-6 border-t-4 border-amber-500">
+                    <h3 class="font-bold text-lg text-slate-900 mb-3">Business (90j)</h3>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li>• 1 offre “Visibilité” vendue (pack starter).</li>
+                        <li>• 1 intégration brand (pack Intégration) test.</li>
+                        <li>• Pipeline invités premium confirmé (top 5 de la liste).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. DIAGNOSTIC & AUDIT -->
+    <section class="py-24 px-6 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto w-full reveal">
+            <div class="section-header">
+                <span class="section-tag">PHASE 0</span>
+                <h2 class="font-impact text-4xl text-slate-900">AUDIT DES ACTIFS</h2>
+                <p class="text-slate-500 text-sm mt-2">Situation actuelle avant déploiement.</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6 mb-12">
+                <div class="glass p-6 text-center">
+                    <i class="fa-brands fa-instagram text-3xl text-pink-500 mb-2"></i>
+                    <div class="text-2xl font-black text-slate-800">32 K</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase">Abonnés</div>
+                </div>
+                <div class="glass p-6 text-center">
+                    <i class="fa-brands fa-tiktok text-3xl text-black mb-2"></i>
+                    <div class="text-2xl font-black text-slate-800">11 K</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase">Abonnés</div>
+                </div>
+                <div class="glass p-6 text-center">
+                    <i class="fa-brands fa-snapchat text-3xl text-yellow-500 mb-2"></i>
+                    <div class="text-2xl font-black text-slate-800">12 K</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase">Abonnés</div>
+                </div>
+                <div class="glass p-6 text-center opacity-50">
+                    <i class="fa-brands fa-youtube text-3xl text-red-600 mb-2"></i>
+                    <div class="text-2xl font-black text-slate-800">--</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase">Inexploité</div>
+                </div>
+            </div>
+
+                <div class="glass p-8 bg-white border-l-4 border-red-500">
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">LE CONSTAT MADARA</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Sherko est déjà reconnu dans la sphère privée par les plus grands, mais reste invisible pour le grand public. 
+                        Il est temps de rendre à Sherko ce qui appartient à Sherko : bâtir la vitrine grand public et posséder la data pour convertir cette notoriété privée en audience massive.
+                    </p>
+                </div>
+        </div>
+    </section>
+
+    <!-- 3. LA CHRONOLOGIE (LE CŒUR DU SUJET) -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-5xl mx-auto w-full reveal">
+            <div class="section-header">
+                <span class="section-tag">MASTER PLAN RÉALISTE</span>
+                <h2 class="font-impact text-4xl text-slate-900">LA SÉQUENCE DE LANCEMENT</h2>
+                <p class="text-slate-500 text-sm mt-2">Un déploiement chirurgical qui respecte les temps de production (Qualité > Vitesse).</p>
+            </div>
+
+            <div class="pl-4">
+                <!-- PHASE 1 : LE FANTÔME (OFFLINE) -->
+                <div class="timeline-node">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="text-4xl font-black text-slate-300">01</span>
+                        <div class="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold uppercase tracking-wider shadow-sm">Mois 1 : Le Fantôme</div>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-ghost text-slate-400"></i> LE STUDIO "OFFLINE"
+                        </h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            <strong>STRATÉGIE CLÉ :</strong> On ne lance PAS de live tout de suite. On utilise le studio pour tourner "à blanc". On crée du stock.
+                            L'objectif est d'inonder les réseaux (Dilution) avec des extraits ultra-qualitatifs pour créer la demande.
+                        </p>
+                        <ul class="space-y-3 text-sm text-slate-700">
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> Tournage de 3 émissions pilotes (Solo / Potes proches).</li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> Montage de 50 Shorts/Reels haute qualité.</li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> Campagne de Teasing "Coming Soon".</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- PHASE 2 : L'ALLUMAGE (SOFT LAUNCH) -->
+                <div class="timeline-node">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="text-4xl font-black text-purple-200">02</span>
+                        <div class="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-sm font-bold uppercase tracking-wider shadow-sm">Mois 2 : L'Allumage</div>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-2xl border border-purple-100 shadow-xl shadow-purple-100/50">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-power-off text-purple-500"></i> SOFT LAUNCH & DISCORD
+                        </h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            La hype est montée. On lance le premier Live Twitch (Soft Launch). Sherko est seul ou avec des proches.
+                            On ouvre le **DISCORD** dans la foulée pour récupérer les "Vrais".
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <span class="block text-xs font-bold text-purple-400 uppercase mb-1">Obj. Twitch</span>
+                                <span class="text-xl font-black text-purple-700">~150 CCV</span>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <span class="block text-xs font-bold text-purple-400 uppercase mb-1">Obj. Discord</span>
+                                <span class="text-xl font-black text-purple-700">~300 Membres</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 3 : LE BIG BANG -->
+                <div class="timeline-node">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="text-4xl font-black text-green-200">03</span>
+                        <div class="px-4 py-2 bg-green-100 text-green-700 rounded-lg text-sm font-bold uppercase tracking-wider shadow-sm">Mois 3 : Le Big Bang</div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl border border-green-200">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-bomb text-green-500"></i> OPÉRATION GAZO (EXEMPLE)
+                        </h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            La machine tourne, le son est parfait, l'équipe est rodée. C'est MAINTENANT qu'on invite le Boss Final.
+                            Stratégie de la "Chaise Vide" : On tease une silhouette pendant 7 jours.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-3 bg-white rounded-lg border border-green-100 shadow-sm">
+                                <span class="text-xs font-mono font-bold text-green-600 bg-green-100 px-2 py-1 rounded">20h00</span>
+                                <span class="text-sm font-bold text-slate-700">Live Twitch événementiel (Concept fort, pas juste interview).</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. L'INFRASTRUCTURE INVISIBLE : LES 5 COUCHES -->
+    <section class="py-24 px-6 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto w-full reveal">
+            <div class="section-header" style="border-left-color: #fff;">
+                <span class="section-tag" style="background: rgba(255,255,255,0.1); color: white; border-color: white;">BACK-OFFICE</span>
+                <h2 class="font-impact text-4xl">L'INFRASTRUCTURE INVISIBLE</h2>
+                <p class="text-slate-400 text-sm mt-2">Ce qui sépare un projet amateur d'une institution indestructible.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- COUCHE 1 : ANTI-ERREUR -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:border-red-500 transition-colors">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded bg-red-500/20 flex items-center justify-center text-red-500"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3 class="font-bold text-lg">1. ANTI-CRISE</h3>
+                    </div>
+                    <div class="text-xs text-slate-300 space-y-2 font-bold uppercase tracking-wider">Bible de crise (réaction < 30s)</div>
+                    <ul class="text-xs text-slate-400 space-y-3">
+                        <li><strong>Symptôme :</strong> OBS plante. <br><span class="text-slate-500">Décision :</span> switch scène “Pause Tech” en 1 clic. <span class="text-slate-500">Resp. :</span> Régi. <span class="text-slate-500">Message :</span> “Pause technique, on revient”. <span class="text-slate-500">Post-mortem :</span> log crash.</li>
+                        <li><strong>Symptôme :</strong> Guest absent/retard. <br><span class="text-slate-500">Décision :</span> lancer Backup Content (réact prêt). <span class="text-slate-500">Resp. :</span> Prod. <span class="text-slate-500">Message :</span> “On commence avec un warm-up”.</li>
+                        <li><strong>Symptôme :</strong> Troll coordonné / raid. <br><span class="text-slate-500">Décision :</span> slowmode + ban wave. <span class="text-slate-500">Resp. :</span> Mod lead. <span class="text-slate-500">Message :</span> “Chat en mode lent, on nettoie”.</li>
+                        <li><strong>Symptôme :</strong> Copyright live. <br><span class="text-slate-500">Décision :</span> mute source, couper scène incriminée. <span class="text-slate-500">Resp. :</span> Tech. <span class="text-slate-500">Message :</span> “Audio temporairement coupé (copyright)”.</li>
+                        <li><strong>Symptôme :</strong> Buzz négatif post-live. <br><span class="text-slate-500">Décision :</span> statement court validé, pas d’impro. <span class="text-slate-500">Resp. :</span> Founder + Comms. <span class="text-slate-500">Post-mortem :</span> 24h après, plan correctif.</li>
+                        <li><strong>Symptôme :</strong> Chute brutale de viewers. <br><span class="text-slate-500">Décision :</span> inject mini-sequence chaude (jeu/sondage), pas de panique ni spam. <span class="text-slate-500">Resp. :</span> Host. <span class="text-slate-500">Message :</span> “On passe en mode interactif 2 minutes”.</li>
+                    </ul>
+                </div>
+
+                <!-- COUCHE 2 : PILOTAGE -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:border-blue-500 transition-colors">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded bg-blue-500/20 flex items-center justify-center text-blue-500"><i class="fa-solid fa-chart-radar"></i></div>
+                        <h3 class="font-bold text-lg">2. TABLEAU DE BORD</h3>
+                    </div>
+                    <ul class="text-xs text-slate-400 space-y-3">
+                        <li><strong>KPIs Live (temps réel):</strong> CCV, rétention minute 5/15/30, chat velocity, taux drop après pub.</li>
+                        <li><strong>KPIs Post (J+1 / J+7 / J+30):</strong> CTR, watchtime, conversion Discord, récurrence des viewers.</li>
+                        <li><strong>KPIs Communautaires:</strong> Discord DAU/WAU, participation threads, taux retention onboarding.</li>
+                        <li><strong>KPIs Business:</strong> leads/opportunités, valeur perçue (mentions presse/partenaires).</li>
+                        <li><strong>Seuils d’action:</strong> &lt;500 vues/clip = pivot format; &gt;5% CTR = scale budget; drop rétention &gt;20% = revoir hook.</li>
+                        <li><strong>KPIs à ignorer:</strong> vues brutes sans rétention, vanity likes, pic unique non récurrent.</li>
+                    </ul>
+                </div>
+
+                <!-- COUCHE 3 : RH & PROCESS -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:border-yellow-500 transition-colors">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded bg-yellow-500/20 flex items-center justify-center text-yellow-500"><i class="fa-solid fa-book-open"></i></div>
+                        <h3 class="font-bold text-lg">3. TRANSMISSION</h3>
+                    </div>
+                    <ul class="text-xs text-slate-400 space-y-3">
+                        <li><strong>Onboarding 48h / rôle:</strong> fiche “À comprendre avant d’agir”, checklist poste, interdits absolus.</li>
+                        <li><strong>Versions Junior/Senior:</strong> tâches déléguables vs non déléguables clairement listées.</li>
+                        <li><strong>Playbooks:</strong> “Comment clipper Sherko”, “Moderation raid”, “Setup son/lumière”.</li>
+                        <li><strong>Remplaçabilité:</strong> binôme par poste + procédure de passation express.</li>
+                    </ul>
+                </div>
+
+                <!-- COUCHE 4 : KAÏZEN -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:border-green-500 transition-colors">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded bg-green-500/20 flex items-center justify-center text-green-500"><i class="fa-solid fa-arrows-rotate"></i></div>
+                        <h3 class="font-bold text-lg">4. ITÉRATION</h3>
+                    </div>
+                    <ul class="text-xs text-slate-400 space-y-3">
+                        <li><strong>Review hebdo (30min):</strong> ce qu’on garde / ce qu’on améliore / ce qu’on tue.</li>
+                        <li><strong>Mensuelle stratégique:</strong> positionnement, formats gagnants, allocation temps/budget.</li>
+                        <li><strong>Trimestrielle reset créatif:</strong> 1 nouveau format test, 1 innovation technique.</li>
+                        <li><strong>Kill switch:</strong> 4 essais sans traction → on coupe.</li>
+                    </ul>
+                </div>
+
+                <!-- COUCHE 5 : JURIDIQUE -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:border-purple-500 transition-colors">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded bg-purple-500/20 flex items-center justify-center text-purple-500"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h3 class="font-bold text-lg">5. JURIDIQUE</h3>
+                    </div>
+                    <ul class="text-xs text-slate-400 space-y-3">
+                        <li><strong>Droits d’image:</strong> invités, mods, clips signés avant diffusion.</li>
+                        <li><strong>Ownership:</strong> live → shorts → archives, propriété Sherko.</li>
+                        <li><strong>Archives sensibles:</strong> stockage chiffré, accès restreint.</li>
+                        <li><strong>Lignes rouges éthiques:</strong> pas de buzz sale, pas de doxx, pas de fake drama.</li>
+                        <li><strong>Clause de sortie:</strong> séparation d’équipe / partenaires clarifiée.</li>
+                    </ul>
+                </div>
+
+                <!-- CARTE DE SYNTHÈSE -->
+                <div class="bg-gradient-to-br from-purple-900 to-slate-900 p-6 rounded-2xl border border-purple-500/30 flex flex-col justify-center text-center">
+                    <h3 class="font-impact text-2xl text-white mb-2">INDESTRUCTIBLE</h3>
+                    <p class="text-xs text-purple-200">
+                        "Un amateur improvise. Un pro a un système." <br>
+                        Cette infrastructure est ton assurance vie.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. LA CONTENT FACTORY (LE FLOOD) -->
+    <section class="py-24 px-6 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto w-full reveal">
+            <div class="section-header">
+                <span class="section-tag">WORKFLOW & DÉLAIS</span>
+                <h2 class="font-impact text-4xl text-slate-900">LA FACTORY</h2>
+                <p class="text-slate-500 text-sm mt-2">Comment transformer 1 live en 50 contenus.</p>
+            </div>
+
+            <div class="relative pl-8 border-l-2 border-slate-200 space-y-12">
+                <!-- STEP 1 -->
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-0 w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-sm">1</div>
+                    <div class="glass p-6 bg-slate-50 inline-block w-full md:w-3/4">
+                        <h4 class="font-black text-lg mb-2">LE DERUSH LIVE (T+0)</h4>
+                        <p class="text-sm text-slate-600">
+                            Pendant le live (ou enregistrement), un modérateur "Clipper" note les timecodes des moments forts dans un Google Sheet partagé.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-0 w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-sm">2</div>
+                    <div class="glass p-6 bg-purple-50 inline-block w-full md:w-3/4 border border-purple-100">
+                        <h4 class="font-black text-lg mb-2 text-purple-900">PRODUCTION COURTE (TIKTOK/REELS)</h4>
+                        <p class="text-sm text-purple-800 mb-2">
+                            <strong>Délai : J+2/3.</strong> On ne rush pas. On veut des sous-titres parfaits, des zooms dynamiques, et une bonne colorimétrie (les A7S III filment en Log, il faut étalonner).
+                        </p>
+                        <span class="text-[10px] bg-purple-200 text-purple-800 px-2 py-1 rounded font-bold">Objectif : 3 à 5 clips / émission</span>
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm">3</div>
+                    <div class="glass p-6 bg-green-50 inline-block w-full md:w-3/4 border border-green-100">
+                        <h4 class="font-black text-lg mb-2 text-green-900">PRODUCTION LONGUE (YOUTUBE)</h4>
+                        <p class="text-sm text-green-800 mb-2">
+                            <strong>Délai : J+4/5.</strong> Montage plus narratif, nettoyage audio complet, miniature travaillée. C'est le contenu patrimoine qui restera des années.
+                        </p>
+                        <span class="text-[10px] bg-green-200 text-green-800 px-2 py-1 rounded font-bold">Objectif : 1 Best-Of / émission</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. LE BUSINESS PLAN (RÉGIE) -->
+    <section class="py-24 px-6 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto w-full reveal">
+            <div class="section-header">
+                <span class="section-tag">MONÉTISATION</span>
+                <h2 class="font-impact text-4xl text-slate-900">LA RÉGIE SHERKO</h2>
+                <p class="text-slate-500 text-sm mt-2">Comment on transforme la hype en chiffre d'affaires.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Pack Visibilité -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-xl transition-shadow flex flex-col">
+                    <div class="mb-4">
+                        <span class="text-xs font-bold text-slate-400 uppercase">Pack</span>
+                        <h3 class="font-black text-2xl text-slate-900">VISIBILITÉ</h3>
+                    </div>
+                    <div class="text-3xl font-black text-purple-600 mb-6">1.500€ <span class="text-sm font-normal text-slate-400">/ mois</span></div>
+                    <ul class="text-sm text-slate-600 space-y-3 flex-1">
+                        <li>• Logo sur l'overlay (petit)</li>
+                        <li>• Commande !partenaire chat</li>
+                        <li>• 1 Mention orale par live</li>
+                    </ul>
+                    <button class="w-full py-3 bg-slate-100 text-slate-600 font-bold rounded-xl text-xs uppercase mt-6">Entrée de gamme</button>
+                </div>
+
+                <!-- Pack Integration -->
+                <div class="bg-white p-8 rounded-2xl border-2 border-purple-500 relative shadow-2xl scale-105 flex flex-col">
+                    <div class="absolute top-0 right-0 bg-purple-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase">Best Seller</div>
+                    <div class="mb-4">
+                        <span class="text-xs font-bold text-purple-500 uppercase">Pack</span>
+                        <h3 class="font-black text-2xl text-slate-900">INTÉGRATION</h3>
+                    </div>
+                    <div class="text-3xl font-black text-purple-600 mb-6">4.000€ <span class="text-sm font-normal text-slate-400">/ opé</span></div>
+                    <ul class="text-sm text-slate-600 space-y-3 flex-1">
+                        <li>• Produit utilisé/bu en live</li>
+                        <li>• Logo Overlay (Moyen)</li>
+                        <li>• 3 Clips dédiés sur TikTok</li>
+                        <li>• Lien épinglé dans le chat</li>
+                    </ul>
+                    <button class="w-full py-3 bg-purple-600 text-white font-bold rounded-xl text-xs uppercase mt-6 shadow-lg shadow-purple-200">Recommandé</button>
+                </div>
+
+                <!-- Pack Domination -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-xl transition-shadow flex flex-col">
+                    <div class="mb-4">
+                        <span class="text-xs font-bold text-slate-400 uppercase">Pack</span>
+                        <h3 class="font-black text-2xl text-slate-900">DOMINATION</h3>
+                    </div>
+                    <div class="text-3xl font-black text-purple-600 mb-6">10.000€+ <span class="text-sm font-normal text-slate-400">/ mois</span></div>
+                    <ul class="text-sm text-slate-600 space-y-3 flex-1">
+                        <li>• Naming de l'émission ("Le Talk Sherko x Nike")</li>
+                        <li>• Décor aux couleurs de la marque</li>
+                        <li>• Exclusivité sectorielle totale</li>
+                        <li>• Droit d'usage des images</li>
+                    </ul>
+                    <button class="w-full py-3 bg-slate-100 text-slate-600 font-bold rounded-xl text-xs uppercase mt-6">Premium</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6bis. PLAYBOOKS CRITIQUES (FULL STACK) -->
+    <section class="py-24 px-6 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto w-full reveal">
+            <div class="section-header">
+                <span class="section-tag">PLAYBOOKS</span>
+                <h2 class="font-impact text-4xl text-slate-900">LES COUCHES INDESTRUCTIBLES</h2>
+                <p class="text-slate-500 text-sm mt-2">Tout ce qui manquait : crise, pilotage, transmission, itération, juridique.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Anti-erreur & Anti-crise -->
+                <div class="glass p-6 border-l-4 border-red-500/80">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-red-100 text-red-600 flex items-center justify-center"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Bible Anti-Erreur & Anti-Crise</h3>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong>OBS plante:</strong> switch scène “Pause Tech” &lt;30s, message prêt, note post-mortem (solo).</li>
+                        <li><strong>Guest absent/retard:</strong> lancer Backup Content, message “warm-up”.</li>
+                        <li><strong>Raid hostile:</strong> slowmode + ban wave (macro), message “chat en mode lent”.</li>
+                        <li><strong>Copyright live:</strong> mute source/scene, message audio coupé, reprendre.</li>
+                        <li><strong>Buzz négatif:</strong> statement court pré-écrit, pas d’impro, revue J+1 (solo).</li>
+                        <li><strong>Chute viewers:</strong> inject séquence interactive 2 min, pas de panique/spam.</li>
+                    </ul>
+                </div>
+
+                <!-- Pilotage & KPIs réels -->
+                <div class="glass p-6 border-l-4 border-blue-500/80">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-gauge-high"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Pilotage & KPIs</h3>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong>Live:</strong> CCV, rétention 5/15/30, chat velocity, drop post-pub.</li>
+                        <li><strong>Post (J+1/7/30):</strong> CTR, watchtime, conversions Discord.</li>
+                        <li><strong>Communauté:</strong> DAU/WAU Discord, participation threads, rétention onboarding.</li>
+                        <li><strong>Business:</strong> leads/opportunités, mentions presse/partenaires.</li>
+                        <li><strong>Seuils (solo):</strong> &lt;500 vues/clip = pivot format; &gt;5% CTR = scale poste; drop rétention &gt;20% = refaire hook.</li>
+                        <li><strong>Ignorés:</strong> vues brutes sans rétention, vanity likes.</li>
+                    </ul>
+                </div>
+
+                <!-- Transmission & Remplaçabilité -->
+                <div class="glass p-6 border-l-4 border-yellow-500/80">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center"><i class="fa-solid fa-people-carry-box"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Transmission & Remplaçabilité</h3>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong>Solo mode:</strong> checklists pour toi (avant live, pendant, après).</li>
+                        <li><strong>Prêt pour délégation future:</strong> mini-fiches rôle (mod, tech, clip) à activer le jour 1.</li>
+                        <li><strong>Playbooks:</strong> clipping Sherko, moderation raid, setup son/lumière (lisibles seul).</li>
+                        <li><strong>Passation express:</strong> un doc “ce que tu dois savoir” pour un backup éventuel.</li>
+                    </ul>
+                </div>
+
+                <!-- Amélioration continue -->
+                <div class="glass p-6 border-l-4 border-green-500/80">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-green-100 text-green-600 flex items-center justify-center"><i class="fa-solid fa-rotate"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Amélioration Continue</h3>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong>Hebdo solo (30min):</strong> garder / améliorer / tuer (1 décision par catégorie).</li>
+                        <li><strong>Mensuel:</strong> format gagnant, temps/budget perso.</li>
+                        <li><strong>Trimestriel reset:</strong> 1 nouveau format test, 1 innovation tech.</li>
+                        <li><strong>Kill switch:</strong> 4 essais sans traction → on coupe.</li>
+                    </ul>
+                </div>
+
+                <!-- Juridique / Éthique / Image -->
+                <div class="glass p-6 border-l-4 border-purple-500/80 lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Juridique • Éthique • Image</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600">
+                        <ul class="space-y-3">
+                            <li><strong>Droits d’image:</strong> invités, mods, clips signés avant diffusion.</li>
+                            <li><strong>Ownership:</strong> live → shorts → archives = propriété Sherko.</li>
+                            <li><strong>Archives sensibles:</strong> stockage chiffré, accès restreint.</li>
+                            <li><strong>Pipeline e-sign:</strong> modèle + outil (DocuSign/HelloSign) + dossier chiffré.</li>
+                        </ul>
+                        <ul class="space-y-3">
+                            <li><strong>Lignes rouges:</strong> pas de fake drama, pas de doxx, pas de buzz sale.</li>
+                            <li><strong>Clause de sortie:</strong> séparation équipe/partenaires cadrée.</li>
+                            <li><strong>Image long terme:</strong> cohérence ton/valeurs, validation avant opés.</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 p-4 rounded-xl border border-white/10 bg-white/5 text-xs text-slate-200 space-y-2">
+                        <div class="font-bold text-white text-sm mb-2">Pack documents à signer (centralisé)</div>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300">
+                            <li>Contrat invité + Droit à l’image</li>
+                            <li>NDA (invité/technicien/monteur)</li>
+                            <li>Cession de droits d’auteur (clips, best-of, overlays)</li>
+                            <li>CGU Discord & Politique données (email, concours)</li>
+                            <li>Autorisation exploitation marque (sponsors, intégrations)</li>
+                            <li>Release audio/vidéo (podcast, VOD, shorts)</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mt-3 text-[11px] uppercase tracking-widest">
+                            <a href="#" class="px-3 py-2 rounded-lg border border-purple-400/50 text-purple-100 hover:bg-purple-500/10">Ouvrir Drive/Docs</a>
+                            <a href="#" class="px-3 py-2 rounded-lg border border-green-400/50 text-green-100 hover:bg-green-500/10">Gabarits e-sign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. SHERKO BRAIN & VIRALIZER (NOUVELLE SECTION) -->
+    <section class="py-32 px-6 bg-[#050505] text-white relative border-t border-white/10">
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-50"></div>
+        <div class="max-w-6xl mx-auto w-full reveal relative z-10">
+            <div class="text-center mb-20">
+                <span class="font-code text-xs text-green-400 border border-green-500/30 px-3 py-1 rounded-full bg-green-500/10 mb-6 inline-block">MADARA INTELLIGENCE CORE</span>
+                <h2 class="font-impact text-5xl md:text-7xl">LES ARMES <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">LOURDES.</span></h2>
+            </div>
+
+            <!-- OUTIL 1 : GENERATOR -->
+            <div class="super-glass p-8 md:p-12 mb-24 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+                    <i class="fa-solid fa-brain text-6xl text-purple-500"></i>
+                </div>
+                
+                <div class="grid md:grid-cols-1 gap-10 md:gap-12 items-start">
+                    <!-- CONTROLS -->
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="font-nike text-3xl mb-2 italic">SHERKO_BRAIN<span class="text-purple-500">.AI</span></h3>
+                            <p class="text-gray-400 text-sm">Générateur de concepts Long Formats (Youtube/Twitch). Pitch complet, timeline minute par minute, angle d'attaque.</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex gap-2 p-1 bg-[#111] rounded-xl border border-white/10">
+                                <button onclick="setLocation('STUDIO', this)" class="loc-btn flex-1 py-3 bg-white text-black font-black text-xs rounded-lg shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-microphone-lines"></i> STUDIO
+                                </button>
+                                <button onclick="setLocation('EXTERIEUR', this)" class="loc-btn flex-1 py-3 text-gray-500 hover:text-white font-bold text-xs rounded-lg transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-earth-americas"></i> EXTÉRIEUR
+                                </button>
+                                <input type="hidden" id="ai-location" value="STUDIO">
+                            </div>
+
+                            <div class="relative">
+                                <input type="text" id="ai-input" class="input-pro w-full p-4 rounded-xl pl-12" placeholder="Ex: Concept avec Gazo, Débat sur le Rap..." value="">
+                                <i class="fa-solid fa-bolt absolute left-4 top-1/2 -translate-y-1/2 text-purple-500"></i>
+                            </div>
+
+                            <button onclick="generateRealConcept()" id="genBtn" class="btn-atomic w-full py-4 rounded-xl flex justify-center text-sm tracking-widest">
+                                GÉNÉRER LE PLAN DÉTAILLÉ
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- OUTPUT DISPLAY (Carte Technique) -->
+                    <div class="relative w-full">
+                        <div class="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent rounded-2xl pointer-events-none"></div>
+                        <div class="flex items-center justify-between mb-3 text-[11px] uppercase tracking-widest text-slate-400">
+                            <span>Résultat</span>
+                            <span class="text-slate-500">Lisible & prêt à poster</span>
+                        </div>
+                        <div id="ai-output" class="ai-output bg-[#080808] border border-white/10 rounded-2xl p-6 font-code text-xs text-gray-300 overflow-y-auto custom-scroll relative w-full">
+                            <!-- Placeholder -->
+                            <div id="ai-placeholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-600 gap-4">
+                                <div class="w-16 h-16 border-2 border-dashed border-gray-700 rounded-full flex items-center justify-center animate-spin-slow">
+                                    <i class="fa-solid fa-atom text-xl"></i>
+                                </div>
+                                <p class="uppercase tracking-widest text-[10px]">En attente de données...</p>
+                            </div>
+                        </div>
+                        <!-- Fake UI Elements -->
+                        <div class="absolute top-4 right-4 flex gap-2">
+                            <span class="badge-score border-green-500/30 text-green-400">ONLINE</span>
+                            <span class="badge-score">V.4.2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OUTIL 2 : VIRALIZER -->
+            <div class="super-glass p-8 md:p-12 relative overflow-hidden group border-t-2 border-pink-500">
+                <div class="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+                    <i class="fa-solid fa-fire text-6xl text-pink-500"></i>
+                </div>
+
+                <div class="grid md:grid-cols-1 gap-10 md:gap-12 items-start">
+                    <!-- CONTROLS -->
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="font-nike text-3xl mb-2 italic">VIRALIZER <span class="text-pink-500">3000</span></h3>
+                            <p class="text-gray-400 text-sm">Optimiseur de CTR (Click-Through Rate). Génère des titres "Pute-à-clic" intelligents et des Hooks visuels.</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="relative">
+                                <input type="text" id="viral-input" class="input-pro w-full p-4 rounded-xl pl-12 focus:border-pink-500" placeholder="Sujet de la vidéo..." value="">
+                                <i class="fa-solid fa-eye absolute left-4 top-1/2 -translate-y-1/2 text-pink-500"></i>
+                            </div>
+
+                            <button onclick="generateViralTitles()" id="viralBtn" class="btn-atomic w-full py-4 rounded-xl flex justify-center text-sm tracking-widest hover:text-pink-600">
+                                BOOSTER LE TITRE
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- OUTPUT DISPLAY -->
+                    <div class="relative w-full">
+                        <div class="absolute inset-0 bg-gradient-to-b from-pink-500/10 to-transparent rounded-2xl pointer-events-none"></div>
+                        <div class="flex items-center justify-between mb-3 text-[11px] uppercase tracking-widest text-slate-400">
+                            <span>Résultat</span>
+                            <span class="text-slate-500">Titres + hook en clair</span>
+                        </div>
+                        <div id="viral-output" class="ai-output bg-[#080808] border border-white/10 rounded-2xl p-6 font-code text-xs text-gray-300 overflow-y-auto w-full">
+                            <p class="opacity-30 text-center mt-10">En attente du sujet...</p>
+                        </div>
+                         <!-- Fake UI Elements -->
+                         <div class="absolute top-4 right-4 flex gap-2">
+                            <span class="badge-score border-pink-500/30 text-pink-400">CTR OPTIMIZER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-32 bg-slate-950 text-center border-t border-slate-800 text-white">
+        <div class="flex items-center justify-center gap-6 mb-8 opacity-60">
+            <span class="font-black text-xl tracking-tighter">MADARA</span>
+            <span class="text-xl text-purple-500">x</span>
+            <span class="font-black text-xl tracking-tighter">SHERKO</span>
+        </div>
+        <p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Document Confidentiel • Paris 2026</p>
+    </footer>
+
+    <script>
+        // ANIMATIONS
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    entry.target.querySelectorAll('.counter').forEach(c => animateValue(c, 0, parseFloat(c.getAttribute('data-target')||'0'), 2000));
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = start + (end - start) * (1 - Math.pow(2, -10 * progress));
+                if(end > 100) obj.innerHTML = Math.floor(current); 
+                else obj.innerHTML = current.toFixed(1);
+                if (progress < 1) window.requestAnimationFrame(step);
+                else { if(end > 100) obj.innerHTML = end; else obj.innerHTML = end.toFixed(1); }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        document.getElementById('totalCounter')?.setAttribute('data-target', 57);
+
+        // LOCATION TOGGLE UI
+        function setLocation(loc, btn) {
+            document.getElementById('ai-location').value = loc;
+            document.querySelectorAll('.loc-btn').forEach(b => {
+                b.classList.remove('bg-white', 'text-black', 'shadow-lg');
+                b.classList.add('text-gray-500', 'hover:text-white');
+            });
+            btn.classList.remove('text-gray-500', 'hover:text-white');
+            btn.classList.add('bg-white', 'text-black', 'shadow-lg');
+        }
+
+        // AI LOGIC via proxy Cloudflare (clé masquée)
+        const apiProxy = "https://wispy-heart-8damadaraxsherko.madara-corporate.workers.dev";
+
+        async function generateRealConcept() {
+            const input = document.getElementById('ai-input').value;
+            const location = document.getElementById('ai-location').value;
+            const output = document.getElementById('ai-output');
+            const placeholder = document.getElementById('ai-placeholder');
+            const btn = document.getElementById('genBtn');
+            if(!input) return;
+
+            if(placeholder) placeholder.style.display = 'none';
+            btn.disabled = true;
+            btn.innerHTML = 'ANALYSE EN COURS...';
+            
+            output.innerHTML = `
+                <div class="space-y-1 font-mono text-green-500 text-[10px]">
+                    <div>> CONNECTING TO NEURAL NET... OK</div>
+                    <div>> FETCHING TRENDS (FR/US)... OK</div>
+                    <div>> ANALYZING SHERKO AUDIENCE PROFILE... OK</div>
+                    <div class="animate-pulse">> GENERATING BLUEPRINT...</div>
+                </div>
+            `;
+
+            const systemPrompt = `Tu es le Directeur Artistique de Sherko. Crée un concept vidéo LONG FORMAT (YouTube/Twitch) détaillé.
+            Lieu : ${location}.
+            Format HTML brut sans markdown.
+            Utilise des classes Tailwind pour le style (text-white, font-bold, text-purple-400, etc).
+            Structure la réponse comme une fiche technique Apple :
+            1. TITRE (H3, Impact)
+            2. PITCH (2 phrases, vendeur)
+            3. TIMELINE (Tableau minute par minute : Intro, Build-up, Climax, Outro)
+            4. SCORES (Viralité, Faisabilité, Budget estimé)
+            5. CTA final (clair, actionnable)
+            Ton : Jeune, Pro, Ambitieux.
+            Demande : "${input}"`;
+
+            try {
+                const response = await fetch(apiProxy, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: systemPrompt }] }] })
+                });
+                const data = await response.json();
+                let html = data.candidates?.[0]?.content?.parts?.[0]?.text?.replace(/```html/g, '').replace(/```/g, '') || '<div class="text-yellow-400">Pas de réponse.</div>';
+                output.innerHTML = html;
+            } catch (e) {
+                output.innerHTML = `<div class="text-red-500 font-mono">ERREUR DE CONNEXION</div>`;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'GÉNÉRER LE PLAN DÉTAILLÉ';
+            }
+        }
+
+        async function generateViralTitles() {
+            const input = document.getElementById('viral-input').value;
+            const output = document.getElementById('viral-output');
+            const btn = document.getElementById('viralBtn');
+            if(!input) return;
+
+            btn.disabled = true;
+            btn.innerHTML = 'OPTIMISATION...';
+            
+            const systemPrompt = `Expert YouTube/TikTok. Génère :
+            1. 3 Titres Viraux (Clickbait éthique)
+            2. 1 Hook Visuel (Description de la 1ère seconde)
+            3. Score de Potentiel (0-100)
+            Format HTML brut, style dashboard, texte blanc/gris.
+            Sujet : '${input}'`;
+
+            try {
+                const response = await fetch(apiProxy, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: systemPrompt }] }] })
+                });
+                const data = await response.json();
+                let html = data.candidates?.[0]?.content?.parts?.[0]?.text?.replace(/```html/g, '').replace(/```/g, '') || '<div class="text-yellow-400">Pas de réponse.</div>';
+                output.innerHTML = html;
+            } catch (e) {
+                output.innerHTML = `<div class="text-red-500 font-mono">ERREUR</div>`;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'BOOST TITRES';
+            }
+        }
+
+        // PROGRESS BAR
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
+        // INIT
+        window.addEventListener('load', () => {});
+    </script>
+</body>
+</html>
