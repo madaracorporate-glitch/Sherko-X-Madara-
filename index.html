@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHERKO : BIBLE OPÉRATIONNELLE 2026 (WAR ROOM)</title>
+    <title>SHERKO : BIBLE OPÉRATIONNELLE 2026</title>
     
     <!-- Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -210,6 +210,8 @@
         }
         /* AI output comfort */
         .ai-output {
+            min-height: 640px;
+            max-width: 100%;
             width: 100%;
             font-size: 13px;
             line-height: 1.6;
@@ -219,10 +221,6 @@
         .ai-output table { width: 100%; border-collapse: collapse; }
         .ai-output table td, .ai-output table th { padding: 6px 8px; border: 1px solid rgba(255,255,255,0.08); }
         .ai-output h1, .ai-output h2, .ai-output h3, .ai-output h4 { margin-top: 10px; margin-bottom: 6px; }
-        
-        .custom-scroll::-webkit-scrollbar { width: 6px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #111; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
 <body class="selection:bg-purple-200 selection:text-purple-900">
@@ -240,7 +238,7 @@
         </div>
         <div class="flex flex-col items-end gap-2">
             <div class="bg-slate-900 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
-                MASTER PLAN V.5
+                MASTER PLAN V.3
             </div>
         </div>
     </nav>
@@ -737,6 +735,115 @@
         </div>
     </section>
 
+    <!-- 6bis. PLAYBOOKS CRITIQUES (FULL STACK) -->
+    <section class="py-24 px-6 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto w-full reveal">
+            <div class="section-header">
+                <span class="section-tag">PLAYBOOKS</span>
+                <h2 class="font-impact text-4xl text-slate-900">LES COUCHES INDESTRUCTIBLES</h2>
+                <p class="text-slate-500 text-sm mt-2">Tout ce qui manquait : crise, pilotage, transmission, itération, juridique.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Anti-erreur & Anti-crise -->
+                <div class="glass p-6 border-l-4 border-red-500/80">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-red-100 text-red-600 flex items-center justify-center"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Bible Anti-Erreur & Anti-Crise</h3>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong>OBS plante:</strong> switch scène “Pause Tech” &lt;30s, message prêt, note post-mortem (solo).</li>
+                        <li><strong>Guest absent/retard:</strong> lancer Backup Content, message “warm-up”.</li>
+                        <li><strong>Raid hostile:</strong> slowmode + ban wave (macro), message “chat en mode lent”.</li>
+                        <li><strong>Copyright live:</strong> mute source/scene, message audio coupé, reprendre.</li>
+                        <li><strong>Buzz négatif:</strong> statement court pré-écrit, pas d’impro, revue J+1 (solo).</li>
+                        <li><strong>Chute viewers:</strong> inject séquence interactive 2 min, pas de panique/spam.</li>
+                    </ul>
+                </div>
+
+                <!-- Pilotage & KPIs réels -->
+                <div class="glass p-6 border-l-4 border-blue-500/80">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-gauge-high"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Pilotage & KPIs</h3>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong>Live:</strong> CCV, rétention 5/15/30, chat velocity, drop post-pub.</li>
+                        <li><strong>Post (J+1/7/30):</strong> CTR, watchtime, conversions Discord.</li>
+                        <li><strong>Communauté:</strong> DAU/WAU Discord, participation threads, rétention onboarding.</li>
+                        <li><strong>Business:</strong> leads/opportunités, mentions presse/partenaires.</li>
+                        <li><strong>Seuils (solo):</strong> &lt;500 vues/clip = pivot format; &gt;5% CTR = scale poste; drop rétention &gt;20% = refaire hook.</li>
+                        <li><strong>Ignorés:</strong> vues brutes sans rétention, vanity likes.</li>
+                    </ul>
+                </div>
+
+                <!-- Transmission & Remplaçabilité -->
+                <div class="glass p-6 border-l-4 border-yellow-500/80">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center"><i class="fa-solid fa-people-carry-box"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Transmission & Remplaçabilité</h3>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong>Solo mode:</strong> checklists pour toi (avant live, pendant, après).</li>
+                        <li><strong>Prêt pour délégation future:</strong> mini-fiches rôle (mod, tech, clip) à activer le jour 1.</li>
+                        <li><strong>Playbooks:</strong> clipping Sherko, moderation raid, setup son/lumière (lisibles seul).</li>
+                        <li><strong>Passation express:</strong> un doc “ce que tu dois savoir” pour un backup éventuel.</li>
+                    </ul>
+                </div>
+
+                <!-- Amélioration continue -->
+                <div class="glass p-6 border-l-4 border-green-500/80">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-green-100 text-green-600 flex items-center justify-center"><i class="fa-solid fa-rotate"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Amélioration Continue</h3>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong>Hebdo solo (30min):</strong> garder / améliorer / tuer (1 décision par catégorie).</li>
+                        <li><strong>Mensuel:</strong> format gagnant, temps/budget perso.</li>
+                        <li><strong>Trimestriel reset:</strong> 1 nouveau format test, 1 innovation tech.</li>
+                        <li><strong>Kill switch:</strong> 4 essais sans traction → on coupe.</li>
+                    </ul>
+                </div>
+
+                <!-- Juridique / Éthique / Image -->
+                <div class="glass p-6 border-l-4 border-purple-500/80 lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">Juridique • Éthique • Image</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600">
+                        <ul class="space-y-3">
+                            <li><strong>Droits d’image:</strong> invités, mods, clips signés avant diffusion.</li>
+                            <li><strong>Ownership:</strong> live → shorts → archives = propriété Sherko.</li>
+                            <li><strong>Archives sensibles:</strong> stockage chiffré, accès restreint.</li>
+                            <li><strong>Pipeline e-sign:</strong> modèle + outil (DocuSign/HelloSign) + dossier chiffré.</li>
+                        </ul>
+                        <ul class="space-y-3">
+                            <li><strong>Lignes rouges:</strong> pas de fake drama, pas de doxx, pas de buzz sale.</li>
+                            <li><strong>Clause de sortie:</strong> séparation équipe/partenaires cadrée.</li>
+                            <li><strong>Image long terme:</strong> cohérence ton/valeurs, validation avant opés.</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 p-4 rounded-xl border border-white/10 bg-white/5 text-xs text-slate-200 space-y-2">
+                        <div class="font-bold text-white text-sm mb-2">Pack documents à signer (centralisé)</div>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300">
+                            <li>Contrat invité + Droit à l’image</li>
+                            <li>NDA (invité/technicien/monteur)</li>
+                            <li>Cession de droits d’auteur (clips, best-of, overlays)</li>
+                            <li>CGU Discord & Politique données (email, concours)</li>
+                            <li>Autorisation exploitation marque (sponsors, intégrations)</li>
+                            <li>Release audio/vidéo (podcast, VOD, shorts)</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mt-3 text-[11px] uppercase tracking-widest">
+                            <a href="#" class="px-3 py-2 rounded-lg border border-purple-400/50 text-purple-100 hover:bg-purple-500/10">Ouvrir Drive/Docs</a>
+                            <a href="#" class="px-3 py-2 rounded-lg border border-green-400/50 text-green-100 hover:bg-green-500/10">Gabarits e-sign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 7. SHERKO BRAIN & VIRALIZER & VIBE CHECK (GRID LAYOUT) -->
     <section class="py-24 px-6 bg-[#050505] text-white relative border-t border-white/10">
         <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-50"></div>
@@ -751,178 +858,216 @@
                 </button>
             </div>
 
-            <div class="grid lg:grid-cols-3 gap-6">
+            <div class="flex flex-col items-center gap-4 mb-8">
+                <div class="flex flex-wrap justify-center gap-2" id="toolTabs">
+                    <button data-tool="0" class="tool-tab active px-3 py-2 rounded-full text-[11px] font-bold flex items-center gap-2 border border-purple-400/40 bg-purple-500/10 text-purple-200">
+                        <i class="fa-solid fa-brain"></i> Brain
+                    </button>
+                    <button data-tool="1" class="tool-tab px-3 py-2 rounded-full text-[11px] font-bold flex items-center gap-2 border border-pink-400/30 bg-white/5 text-pink-200">
+                        <i class="fa-solid fa-fire"></i> Viralizer
+                    </button>
+                    <button data-tool="2" class="tool-tab px-3 py-2 rounded-full text-[11px] font-bold flex items-center gap-2 border border-amber-400/30 bg-white/5 text-amber-200">
+                        <i class="fa-solid fa-hand-peace"></i> Vibe
+                    </button>
+                    <button data-tool="3" class="tool-tab px-3 py-2 rounded-full text-[11px] font-bold flex items-center gap-2 border border-emerald-400/30 bg-white/5 text-emerald-200">
+                        <i class="fa-solid fa-sack-dollar"></i> Bag
+                    </button>
+                    <button data-tool="4" class="tool-tab px-3 py-2 rounded-full text-[11px] font-bold flex items-center gap-2 border border-red-400/30 bg-white/5 text-red-200">
+                        <i class="fa-solid fa-shield-cat"></i> Drama
+                    </button>
+                </div>
+                <div class="flex items-center justify-center gap-3">
+                    <button id="slidePrev" class="px-3 py-2 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-sm font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-chevron-left text-xs"></i> Précédent
+                    </button>
+                    <div class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-mono uppercase tracking-widest" id="toolLabel">SHERKO_BRAIN.AI</div>
+                    <button id="slideNext" class="px-3 py-2 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-sm font-bold flex items-center gap-2">
+                        Suivant <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="tool-slider" class="relative">
                 <!-- OUTIL 1 : GENERATOR -->
-                <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                        <i class="fa-solid fa-brain text-4xl text-purple-500"></i>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <h3 class="font-nike text-xl mb-1 italic">SHERKO_BRAIN<span class="text-purple-500">.AI</span></h3>
-                        <p class="text-gray-400 text-xs line-clamp-2">Générateur de concepts Long Formats (Youtube/Twitch). Pitch, timeline, angle.</p>
-                    </div>
-
-                    <div class="space-y-3 mb-6">
-                         <div class="flex gap-2 p-1 bg-[#111] rounded-lg border border-white/10">
-                            <button onclick="setLocation('STUDIO', this)" class="loc-btn flex-1 py-2 bg-white text-black font-black text-[10px] rounded shadow-lg transition-all flex items-center justify-center gap-1">
-                                <i class="fa-solid fa-microphone-lines"></i> STUDIO
-                            </button>
-                            <button onclick="setLocation('EXTERIEUR', this)" class="loc-btn flex-1 py-2 text-gray-500 hover:text-white font-bold text-[10px] rounded transition-all flex items-center justify-center gap-1">
-                                <i class="fa-solid fa-earth-americas"></i> EXT.
-                            </button>
-                            <input type="hidden" id="ai-location" value="STUDIO">
+                <div class="tool-slide">
+                    <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
+                            <i class="fa-solid fa-brain text-4xl text-purple-500"></i>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-nike text-xl mb-1 italic">SHERKO_BRAIN<span class="text-purple-500">.AI</span></h3>
+                            <p class="text-gray-400 text-xs line-clamp-2">Générateur de concepts Long Formats (Youtube/Twitch). Pitch, timeline, angle.</p>
                         </div>
 
-                        <div class="relative">
-                            <input type="text" id="ai-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs" placeholder="Concept avec Gazo..." value="">
-                            <i class="fa-solid fa-bolt absolute left-3 top-1/2 -translate-y-1/2 text-purple-500 text-xs"></i>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex gap-2 p-1 bg-[#111] rounded-lg border border-white/10">
+                                <button onclick="setLocation('STUDIO', this)" class="loc-btn flex-1 py-2 bg-white text-black font-black text-[10px] rounded shadow-lg transition-all flex items-center justify-center gap-1">
+                                    <i class="fa-solid fa-microphone-lines"></i> STUDIO
+                                </button>
+                                <button onclick="setLocation('EXTERIEUR', this)" class="loc-btn flex-1 py-2 text-gray-500 hover:text-white font-bold text-[10px] rounded transition-all flex items-center justify-center gap-1">
+                                    <i class="fa-solid fa-earth-americas"></i> EXT.
+                                </button>
+                                <input type="hidden" id="ai-location" value="STUDIO">
+                            </div>
+
+                            <div class="relative">
+                                <input type="text" id="ai-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs" placeholder="Concept avec Gazo..." value="">
+                                <i class="fa-solid fa-bolt absolute left-3 top-1/2 -translate-y-1/2 text-purple-500 text-xs"></i>
+                            </div>
+
+                            <button onclick="generateRealConcept()" id="genBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest">
+                                GÉNÉRER
+                            </button>
                         </div>
 
-                        <button onclick="generateRealConcept()" id="genBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest">
-                            GÉNÉRER
-                        </button>
-                    </div>
-
-                    <!-- OUTPUT DISPLAY -->
-                    <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
-                        <div class="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent rounded-xl pointer-events-none"></div>
-                        <div id="ai-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto custom-scroll relative flex-grow h-64">
-                            <!-- Placeholder -->
-                            <div id="ai-placeholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-600 gap-2">
-                                <div class="w-8 h-8 border-2 border-dashed border-gray-700 rounded-full flex items-center justify-center animate-spin-slow">
-                                    <i class="fa-solid fa-atom text-xs"></i>
+                        <!-- OUTPUT DISPLAY -->
+                        <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
+                            <div class="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent rounded-xl pointer-events-none"></div>
+                            <div id="ai-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto custom-scroll relative flex-grow h-64">
+                                <!-- Placeholder -->
+                                <div id="ai-placeholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-600 gap-2">
+                                    <div class="w-8 h-8 border-2 border-dashed border-gray-700 rounded-full flex items-center justify-center animate-spin-slow">
+                                        <i class="fa-solid fa-atom text-xs"></i>
+                                    </div>
+                                    <p class="uppercase tracking-widest text-[9px]">En attente...</p>
                                 </div>
-                                <p class="uppercase tracking-widest text-[9px]">En attente...</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- OUTIL 2 : VIRALIZER -->
-                <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full border-t border-pink-500/30">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                        <i class="fa-solid fa-fire text-4xl text-pink-500"></i>
-                    </div>
-
-                    <div class="mb-6">
-                        <h3 class="font-nike text-xl mb-1 italic">VIRALIZER <span class="text-pink-500">3000</span></h3>
-                        <p class="text-gray-400 text-xs line-clamp-2">Optimiseur de CTR. Titres "Pute-à-clic" intelligents et Hooks.</p>
-                    </div>
-
-                    <div class="space-y-3 mb-6">
-                        <div class="relative">
-                            <input type="text" id="viral-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs focus:border-pink-500" placeholder="Sujet vidéo..." value="">
-                            <i class="fa-solid fa-eye absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xs"></i>
+                <div class="tool-slide hidden">
+                    <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full border-t border-pink-500/30">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
+                            <i class="fa-solid fa-fire text-4xl text-pink-500"></i>
                         </div>
 
-                        <button onclick="generateViralTitles()" id="viralBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest hover:text-pink-600">
-                            BOOSTER
-                        </button>
-                    </div>
+                        <div class="mb-6">
+                            <h3 class="font-nike text-xl mb-1 italic">VIRALIZER <span class="text-pink-500">3000</span></h3>
+                            <p class="text-gray-400 text-xs line-clamp-2">Optimiseur de CTR. Titres "Pute-à-clic" intelligents et Hooks.</p>
+                        </div>
 
-                    <!-- OUTPUT DISPLAY -->
-                    <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
-                        <div class="absolute inset-0 bg-gradient-to-b from-pink-500/10 to-transparent rounded-xl pointer-events-none"></div>
-                        <div id="viral-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto flex-grow h-64">
-                            <p class="opacity-30 text-center mt-10">En attente...</p>
+                        <div class="space-y-3 mb-6">
+                            <div class="relative">
+                                <input type="text" id="viral-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs focus:border-pink-500" placeholder="Sujet vidéo..." value="">
+                                <i class="fa-solid fa-eye absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xs"></i>
+                            </div>
+
+                            <button onclick="generateViralTitles()" id="viralBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest hover:text-pink-600">
+                                BOOSTER
+                            </button>
+                        </div>
+
+                        <!-- OUTPUT DISPLAY -->
+                        <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
+                            <div class="absolute inset-0 bg-gradient-to-b from-pink-500/10 to-transparent rounded-xl pointer-events-none"></div>
+                            <div id="viral-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto flex-grow h-64">
+                                <p class="opacity-30 text-center mt-10">En attente...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- OUTIL 3 : VIBE CHECK -->
-                <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full border-t border-amber-500/30">
-                     <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                        <i class="fa-solid fa-hand-peace text-4xl text-amber-500"></i>
-                    </div>
-
-                    <div class="mb-6">
-                        <h3 class="font-nike text-xl mb-1 italic">VIBE_CHECK<span class="text-amber-500">.AI</span></h3>
-                        <p class="text-gray-400 text-xs line-clamp-2">Le Connecteur "Pote". Sujets "Off" et dossiers initiés.</p>
-                    </div>
-
-                    <div class="space-y-3 mb-6">
-                        <div class="relative">
-                            <input type="text" id="scan-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs focus:border-amber-500" placeholder="Nom du Pote..." value="">
-                            <i class="fa-solid fa-user-group absolute left-3 top-1/2 -translate-y-1/2 text-amber-500 text-xs"></i>
+                <div class="tool-slide hidden">
+                    <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full border-t border-amber-500/30">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
+                            <i class="fa-solid fa-hand-peace text-4xl text-amber-500"></i>
                         </div>
 
-                        <button onclick="generateGuestProfile()" id="scanBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest hover:text-amber-600">
-                            DOSSIERS
-                        </button>
-                    </div>
+                        <div class="mb-6">
+                            <h3 class="font-nike text-xl mb-1 italic">VIBE_CHECK<span class="text-amber-500">.AI</span></h3>
+                            <p class="text-gray-400 text-xs line-clamp-2">Le Connecteur "Pote". Sujets "Off" et dossiers initiés.</p>
+                        </div>
 
-                    <!-- OUTPUT DISPLAY -->
-                    <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
-                        <div class="absolute inset-0 bg-gradient-to-b from-amber-500/10 to-transparent rounded-xl pointer-events-none"></div>
-                        <div id="scan-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto flex-grow h-64">
-                            <p class="opacity-30 text-center mt-10">En attente...</p>
+                        <div class="space-y-3 mb-6">
+                            <div class="relative">
+                                <input type="text" id="scan-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs focus:border-amber-500" placeholder="Nom du Pote..." value="">
+                                <i class="fa-solid fa-user-group absolute left-3 top-1/2 -translate-y-1/2 text-amber-500 text-xs"></i>
+                            </div>
+
+                            <button onclick="generateGuestProfile()" id="scanBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest hover:text-amber-600">
+                                DOSSIERS
+                            </button>
+                        </div>
+
+                        <!-- OUTPUT DISPLAY -->
+                        <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
+                            <div class="absolute inset-0 bg-gradient-to-b from-amber-500/10 to-transparent rounded-xl pointer-events-none"></div>
+                            <div id="scan-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto flex-grow h-64">
+                                <p class="opacity-30 text-center mt-10">En attente...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- OUTIL 4 : BAG CHASER (NOUVEAU) -->
-                <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full border-t border-emerald-500/30">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                        <i class="fa-solid fa-money-bill-wave text-4xl text-emerald-500"></i>
-                    </div>
-
-                    <div class="mb-6">
-                        <h3 class="font-nike text-xl mb-1 italic">BAG_CHASER<span class="text-emerald-500">.AI</span></h3>
-                        <p class="text-gray-400 text-xs line-clamp-2">Le Négociateur. Génère des DMs de prospection "Street-Corp" pour sécuriser le sac.</p>
-                    </div>
-
-                    <div class="space-y-3 mb-6">
-                        <div class="relative">
-                            <input type="text" id="bag-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs focus:border-emerald-500" placeholder="Marque + Objectif (ex: Nike - Sponsoring)..." value="">
-                            <i class="fa-solid fa-sack-dollar absolute left-3 top-1/2 -translate-y-1/2 text-emerald-500 text-xs"></i>
+                <div class="tool-slide hidden">
+                    <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full border-t border-emerald-500/30">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
+                            <i class="fa-solid fa-money-bill-wave text-4xl text-emerald-500"></i>
                         </div>
 
-                        <button onclick="generateBusinessDM()" id="bagBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest hover:text-emerald-600">
-                            SÉCURISER LE SAC
-                        </button>
-                    </div>
+                        <div class="mb-6">
+                            <h3 class="font-nike text-xl mb-1 italic">BAG_CHASER<span class="text-emerald-500">.AI</span></h3>
+                            <p class="text-gray-400 text-xs line-clamp-2">Le Négociateur. Génère des DMs de prospection "Street-Corp" pour sécuriser le sac.</p>
+                        </div>
 
-                    <!-- OUTPUT DISPLAY -->
-                    <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
-                        <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/10 to-transparent rounded-xl pointer-events-none"></div>
-                        <div id="bag-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto flex-grow h-64">
-                            <p class="opacity-30 text-center mt-10">En attente de cible...</p>
+                        <div class="space-y-3 mb-6">
+                            <div class="relative">
+                                <input type="text" id="bag-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs focus:border-emerald-500" placeholder="Marque + Objectif (ex: Nike - Sponsoring)..." value="">
+                                <i class="fa-solid fa-sack-dollar absolute left-3 top-1/2 -translate-y-1/2 text-emerald-500 text-xs"></i>
+                            </div>
+
+                            <button onclick="generateBusinessDM()" id="bagBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest hover:text-emerald-600">
+                                SÉCURISER LE SAC
+                            </button>
+                        </div>
+
+                        <!-- OUTPUT DISPLAY -->
+                        <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
+                            <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/10 to-transparent rounded-xl pointer-events-none"></div>
+                            <div id="bag-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto flex-grow h-64">
+                                <p class="opacity-30 text-center mt-10">En attente de cible...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- OUTIL 5 : DRAMA SHIELD (NOUVEAU) -->
-                <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full border-t border-red-500/30">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                        <i class="fa-solid fa-shield-cat text-4xl text-red-500"></i>
-                    </div>
-
-                    <div class="mb-6">
-                        <h3 class="font-nike text-xl mb-1 italic">DRAMA_SHIELD<span class="text-red-500">.AI</span></h3>
-                        <p class="text-gray-400 text-xs line-clamp-2">Gestion de crise. Éteindre l'incendie ou contre-attaquer avec style.</p>
-                    </div>
-
-                    <div class="space-y-3 mb-6">
-                        <div class="relative">
-                            <input type="text" id="drama-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs focus:border-red-500" placeholder="Le Drama (ex: On a dit que Sherko...)..." value="">
-                            <i class="fa-solid fa-fire-extinguisher absolute left-3 top-1/2 -translate-y-1/2 text-red-500 text-xs"></i>
+                <div class="tool-slide hidden">
+                    <div class="super-glass p-6 relative overflow-hidden group flex flex-col h-full border-t border-red-500/30">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
+                            <i class="fa-solid fa-shield-cat text-4xl text-red-500"></i>
                         </div>
 
-                        <button onclick="generateDramaResponse()" id="dramaBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest hover:text-red-600">
-                            GÉRER LA CRISE
-                        </button>
-                    </div>
+                        <div class="mb-6">
+                            <h3 class="font-nike text-xl mb-1 italic">DRAMA_SHIELD<span class="text-red-500">.AI</span></h3>
+                            <p class="text-gray-400 text-xs line-clamp-2">Gestion de crise. Éteindre l'incendie ou contre-attaquer avec style.</p>
+                        </div>
 
-                    <!-- OUTPUT DISPLAY -->
-                    <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
-                        <div class="absolute inset-0 bg-gradient-to-b from-red-500/10 to-transparent rounded-xl pointer-events-none"></div>
-                        <div id="drama-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto flex-grow h-64">
-                            <p class="opacity-30 text-center mt-10">En attente d'alerte...</p>
+                        <div class="space-y-3 mb-6">
+                            <div class="relative">
+                                <input type="text" id="drama-input" class="input-pro w-full p-3 rounded-lg pl-10 text-xs focus:border-red-500" placeholder="Le Drama (ex: On a dit que Sherko...)..." value="">
+                                <i class="fa-solid fa-fire-extinguisher absolute left-3 top-1/2 -translate-y-1/2 text-red-500 text-xs"></i>
+                            </div>
+
+                            <button onclick="generateDramaResponse()" id="dramaBtn" class="btn-atomic w-full py-3 rounded-lg flex justify-center text-xs tracking-widest hover:text-red-600">
+                                GÉRER LA CRISE
+                            </button>
+                        </div>
+
+                        <!-- OUTPUT DISPLAY -->
+                        <div class="relative w-full flex-grow flex flex-col min-h-[250px]">
+                            <div class="absolute inset-0 bg-gradient-to-b from-red-500/10 to-transparent rounded-xl pointer-events-none"></div>
+                            <div id="drama-output" class="ai-output bg-[#080808] border border-white/10 rounded-xl p-4 font-code text-[10px] text-gray-300 overflow-y-auto flex-grow h-64">
+                                <p class="opacity-30 text-center mt-10">En attente d'alerte...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -979,6 +1124,45 @@
         // AI LOGIC via proxy Cloudflare (clé masquée)
         const apiProxy = "https://wispy-heart-8damadaraxsherko.madara-corporate.workers.dev";
 
+        async function callCloudflare(prompt) {
+            const payload = JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] });
+            try {
+                const response = await fetch(apiProxy, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: payload
+                });
+                const raw = await response.text();
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${raw.slice(0, 300)}`);
+                }
+                let data;
+                try {
+                    data = JSON.parse(raw);
+                } catch (jsonErr) {
+                    throw new Error(`Parse JSON: ${jsonErr.message} | Raw: ${raw.slice(0, 300)}`);
+                }
+                const html = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!html) {
+                    throw new Error(`Réponse vide: ${raw.slice(0, 300)}`);
+                }
+                return html.replace(/```html/g, '').replace(/```/g, '');
+            } catch (e) {
+                return { error: e.message };
+            }
+        }
+
+        function offlineFallback(toolName) {
+            const stamp = new Date().toLocaleTimeString();
+            return `
+                <div class="text-[11px] font-mono text-amber-300 space-y-2">
+                    <div class="font-bold text-amber-400">Mode dégradé (${toolName})</div>
+                    <p>Le proxy Cloudflare répond 429 (quota Gemini atteint). Affiche un mock pour continuer à tester l'UI.</p>
+                    <div class="text-[10px] text-amber-200 opacity-70">${stamp}</div>
+                </div>
+            `;
+        }
+
         // WAR ROOM ACTIVATION
         function activateWarRoom() {
             const warBtn = document.getElementById('warRoomBtn');
@@ -992,7 +1176,7 @@
             if(!document.getElementById('bag-input').value) document.getElementById('bag-input').value = "Winamax - Sponsoring Live 24h";
             if(!document.getElementById('drama-input').value) document.getElementById('drama-input').value = "Sherko a l'air drogué pendant le live 24h";
 
-            // 2. TRIGGER ALL FUNCTIONS SIMULTANEOUSLY
+            // 2. TRIGGER ALL FUNCTIONS SIMULTANÉMENT
             setTimeout(() => {
                 generateRealConcept();
                 generateViralTitles();
@@ -1041,21 +1225,18 @@
             Ton : Jeune, Pro, Ambitieux.
             Demande : "${input}"`;
 
-            try {
-                const response = await fetch(apiProxy, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: systemPrompt }] }] })
-                });
-                const data = await response.json();
-                let html = data.candidates?.[0]?.content?.parts?.[0]?.text?.replace(/```html/g, '').replace(/```/g, '') || '<div class="text-yellow-400">Pas de réponse.</div>';
-                output.innerHTML = html;
-            } catch (e) {
-                output.innerHTML = `<div class="text-red-500 font-mono">ERREUR DE CONNEXION</div>`;
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = 'GÉNÉRER';
+            const res = await callCloudflare(systemPrompt);
+            if (res?.error) {
+                if (res.error.includes('429')) {
+                    output.innerHTML = offlineFallback('SHERKO_BRAIN.AI');
+                } else {
+                    output.innerHTML = `<div class="text-red-400 font-mono text-[11px]">ERREUR: ${res.error}</div>`;
+                }
+            } else {
+                output.innerHTML = res;
             }
+            btn.disabled = false;
+            btn.innerHTML = 'GÉNÉRER';
         }
 
         async function generateViralTitles() {
@@ -1074,21 +1255,18 @@
             Format HTML brut, style dashboard, texte blanc/gris.
             Sujet : '${input}'`;
 
-            try {
-                const response = await fetch(apiProxy, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: systemPrompt }] }] })
-                });
-                const data = await response.json();
-                let html = data.candidates?.[0]?.content?.parts?.[0]?.text?.replace(/```html/g, '').replace(/```/g, '') || '<div class="text-yellow-400">Pas de réponse.</div>';
-                output.innerHTML = html;
-            } catch (e) {
-                output.innerHTML = `<div class="text-red-500 font-mono">ERREUR</div>`;
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = 'BOOSTER';
+            const res = await callCloudflare(systemPrompt);
+            if (res?.error) {
+                if (res.error.includes('429')) {
+                    output.innerHTML = offlineFallback('VIRALIZER 3000');
+                } else {
+                    output.innerHTML = `<div class="text-red-400 font-mono text-[11px]">ERREUR: ${res.error}</div>`;
+                }
+            } else {
+                output.innerHTML = res;
             }
+            btn.disabled = false;
+            btn.innerHTML = 'BOOSTER';
         }
 
         async function generateGuestProfile() {
@@ -1113,21 +1291,18 @@
             
             Ton : Chill, Pote, Insider, Argot maîtrisé.`;
 
-            try {
-                const response = await fetch(apiProxy, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: systemPrompt }] }] })
-                });
-                const data = await response.json();
-                let html = data.candidates?.[0]?.content?.parts?.[0]?.text?.replace(/```html/g, '').replace(/```/g, '') || '<div class="text-yellow-400">Pas de réponse.</div>';
-                output.innerHTML = html;
-            } catch (e) {
-                output.innerHTML = `<div class="text-red-500 font-mono">ERREUR</div>`;
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = 'DOSSIERS';
+            const res = await callCloudflare(systemPrompt);
+            if (res?.error) {
+                if (res.error.includes('429')) {
+                    output.innerHTML = offlineFallback('VIBE_CHECK.AI');
+                } else {
+                    output.innerHTML = `<div class="text-red-400 font-mono text-[11px]">ERREUR: ${res.error}</div>`;
+                }
+            } else {
+                output.innerHTML = res;
             }
+            btn.disabled = false;
+            btn.innerHTML = 'DOSSIERS';
         }
 
         async function generateBusinessDM() {
@@ -1153,21 +1328,18 @@
             3. LE GROS DEAL (Approche vision : "Partenariat exclusif sur 12 mois max. On construit la référence").
             `;
 
-            try {
-                const response = await fetch(apiProxy, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: systemPrompt }] }] })
-                });
-                const data = await response.json();
-                let html = data.candidates?.[0]?.content?.parts?.[0]?.text?.replace(/```html/g, '').replace(/```/g, '') || '<div class="text-yellow-400">Pas de réponse.</div>';
-                output.innerHTML = html;
-            } catch (e) {
-                output.innerHTML = `<div class="text-red-500 font-mono">ERREUR</div>`;
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = 'SÉCURISER LE SAC';
+            const res = await callCloudflare(systemPrompt);
+            if (res?.error) {
+                if (res.error.includes('429')) {
+                    output.innerHTML = offlineFallback('BAG_CHASER.AI');
+                } else {
+                    output.innerHTML = `<div class="text-red-400 font-mono text-[11px]">ERREUR: ${res.error}</div>`;
+                }
+            } else {
+                output.innerHTML = res;
             }
+            btn.disabled = false;
+            btn.innerHTML = 'SÉCURISER LE SAC';
         }
 
         async function generateDramaResponse() {
@@ -1186,21 +1358,18 @@
             3. STRATÉGIE LIVE (Ce qu'on doit dire ce soir à l'antenne pour transformer la crise en audience).
             Ton : Sherko, pas de victime, pas d'excuses faibles.`;
 
-            try {
-                const response = await fetch(apiProxy, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: systemPrompt }] }] })
-                });
-                const data = await response.json();
-                let html = data.candidates?.[0]?.content?.parts?.[0]?.text?.replace(/```html/g, '').replace(/```/g, '') || '<div class="text-yellow-400">Pas de réponse.</div>';
-                output.innerHTML = html;
-            } catch (e) {
-                output.innerHTML = `<div class="text-red-500 font-mono">ERREUR</div>`;
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = 'GÉRER LA CRISE';
+            const res = await callCloudflare(systemPrompt);
+            if (res?.error) {
+                if (res.error.includes('429')) {
+                    output.innerHTML = offlineFallback('DRAMA_SHIELD.AI');
+                } else {
+                    output.innerHTML = `<div class="text-red-400 font-mono text-[11px]">ERREUR: ${res.error}</div>`;
+                }
+            } else {
+                output.innerHTML = res;
             }
+            btn.disabled = false;
+            btn.innerHTML = 'GÉRER LA CRISE';
         }
 
         // PROGRESS BAR
@@ -1211,8 +1380,69 @@
             document.getElementById("progress-bar").style.width = scrolled + "%";
         };
 
+        // SLIDER TOOLS (Affichage 1 outil + navigation)
+        const toolSlides = Array.from(document.querySelectorAll('.tool-slide'));
+        const toolNames = [
+            'SHERKO_BRAIN.AI',
+            'VIRALIZER 3000',
+            'VIBE_CHECK.AI',
+            'BAG_CHASER.AI',
+            'DRAMA_SHIELD.AI'
+        ];
+        const toolTabColors = [
+            { border: 'border-purple-400/40', text: 'text-purple-200', bg: 'bg-purple-500/10' },
+            { border: 'border-pink-400/30', text: 'text-pink-200', bg: 'bg-pink-500/10' },
+            { border: 'border-amber-400/30', text: 'text-amber-200', bg: 'bg-amber-500/10' },
+            { border: 'border-emerald-400/30', text: 'text-emerald-200', bg: 'bg-emerald-500/10' },
+            { border: 'border-red-400/30', text: 'text-red-200', bg: 'bg-red-500/10' },
+        ];
+        let toolIndex = 0;
+
+        function updateToolSlider() {
+            toolSlides.forEach((slide, idx) => {
+                if (idx === toolIndex) slide.classList.remove('hidden');
+                else slide.classList.add('hidden');
+            });
+            const label = document.getElementById('toolLabel');
+            if (label) label.textContent = toolNames[toolIndex] || 'TOOL';
+
+            // update tabs style
+            const tabs = document.querySelectorAll('.tool-tab');
+            tabs.forEach((tab, idx) => {
+                tab.classList.remove('active', 'border-purple-400/40', 'text-purple-200', 'bg-purple-500/10', 'border-pink-400/30', 'text-pink-200', 'bg-pink-500/10', 'border-amber-400/30', 'text-amber-200', 'bg-amber-500/10', 'border-emerald-400/30', 'text-emerald-200', 'bg-emerald-500/10', 'border-red-400/30', 'text-red-200', 'bg-red-500/10');
+                const color = toolTabColors[idx];
+                tab.classList.add(color.border, color.text, color.bg);
+                if (idx === toolIndex) tab.classList.add('active');
+            });
+        }
+
+        function initToolSlider() {
+            const prev = document.getElementById('slidePrev');
+            const next = document.getElementById('slideNext');
+            if (prev && next) {
+                prev.addEventListener('click', () => {
+                    toolIndex = (toolIndex + toolSlides.length - 1) % toolSlides.length;
+                    updateToolSlider();
+                });
+                next.addEventListener('click', () => {
+                    toolIndex = (toolIndex + 1) % toolSlides.length;
+                    updateToolSlider();
+                });
+            }
+            document.querySelectorAll('.tool-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const idx = parseInt(tab.getAttribute('data-tool'), 10) || 0;
+                    toolIndex = idx % toolSlides.length;
+                    updateToolSlider();
+                });
+            });
+            updateToolSlider();
+        }
+
         // INIT
-        window.addEventListener('load', () => {});
+        window.addEventListener('load', () => {
+            initToolSlider();
+        });
     </script>
 </body>
 </html>
